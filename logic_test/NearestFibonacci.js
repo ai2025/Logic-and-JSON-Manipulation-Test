@@ -1,20 +1,52 @@
 function nearestFibo(n) {
 	if (n == 0) {
-		return;
+		return "Your number is Fibonacci";
 	}
 
-	let n1 = 0,
-		n2 = 1;
-	let n3 = n1 + n2;
+	if (
+		Math.sqrt(5 * n ** 2 + 4) % 1 == 0 ||
+		Math.sqrt(5 * n ** 2 - 4) % 1 == 0
+	) {
+		return "Your number is Fibonacci";
+	} else {
+		let addons = 0;
 
-	while (n3 <= n) {
-		n1 = n2;
-		n2 = n3;
-		n3 = n1 + n2;
+		while (true) {
+			addons += 1;
+
+			if (
+				Math.sqrt(5 * (n + addons) ** 2 + 4) % 1 == 0 ||
+				Math.sqrt(5 * (n + addons) ** 2 - 4) % 1 == 0
+			) {
+				return (
+					"Nearest Fibonacci Number from " +
+					n +
+					" is " +
+					(n + addons) +
+					" by doing " +
+					n +
+					" + " +
+					addons
+				);
+			}
+
+			if (
+				Math.sqrt(5 * (n - addons) ** 2 + 4) % 1 == 0 ||
+				Math.sqrt(5 * (n - addons) ** 2 - 4) % 1 == 0
+			) {
+				return (
+					"Nearest Fibonacci Number from " +
+					n +
+					" is " +
+					(n + addons) +
+					" by doing " +
+					n +
+					" - " +
+					addons
+				);
+			}
+		}
 	}
-
-	let ans = Math.abs(n3 - n) >= Math.abs(n2 - n) ? n3 : n2;
-	return ans;
 }
 
 const arr = [15, 3, 1];
@@ -23,4 +55,4 @@ for (let i = 0; i < arr.length; i++) {
 	sum += arr[i];
 }
 
-console.log("Nearest Fibo from " + sum + " is " + nearestFibo(sum));
+console.log(nearestFibo(sum));
